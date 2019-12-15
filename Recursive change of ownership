@@ -1,1 +1,37 @@
+-hosts
+[webservers]
+  12345
+  
+  
+ remote_user:admin
+ remote_password:admin
+  
+-name:create a directory if it does not exit
+file:
+ path:/ect/ansible/test
+ state: directory
+ mode: '0755'
+register:directory created
 
+- name: Touch a file and  set the permissions
+  file:
+    path: /etc/ansible/test/test.py
+    state: touch
+    mode: u=rw,g=r,o=r
+  register:file created
+    
+    - name: Touch a file and  set the permissions
+  file:
+    path: /etc/ansible/test/test1.py
+    state: touch
+    mode: u=rw,g=r,o=r
+  register:file1 created
+    
+- name: Recursively change ownership of a directory
+  file:
+    path: /etc/ansible/test
+    state: directory
+    recurse: yes
+    owner: sindhu
+    group: sindhu
+register:ownership changed
