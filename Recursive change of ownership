@@ -1,3 +1,4 @@
+---
 -hosts
 [webservers]
   12345
