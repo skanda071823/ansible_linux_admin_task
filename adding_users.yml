@@ -1,20 +1,11 @@
 
 ---
----
--hosts
-[webservers]
-  12345
-  
 - name: Add two new users in the host node 
   user:
-    name: {{new_host}
-     with_new_hosts:
-      -newhost1
-      -newhost2
-    comment: alreadyexixts
-    uid: {{uid}}
-     with_uid:
-     -123
-     -456
-    group: admin
-   register:new users added.
+    name:"{{item.name}}"
+    state: present
+  groups:"{{item.groups}}"
+  loops:
+    -{name: 'newhost1',groups: 'wheel'}
+    -{name: 'newhost2',groups: 'root'}
+  comment: hosts added
